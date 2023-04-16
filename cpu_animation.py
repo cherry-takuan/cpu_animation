@@ -37,26 +37,26 @@ Reg_table = {
 }
 
 def Reg_Color(svg,ID,mode,step):
-    select_c = "ID-"+str(ID).zfill(2)+"_STROKE"
+    select_s = "ID-"+str(ID).zfill(2)+"_STROKE"
     select_f = "ID-"+str(ID).zfill(2)+"_FILL"
 
     if mode == "a":
         svg = svg.replace(select_f,RED_REG_FILL)
-        svg = svg.replace(select_c,RED_STROKE)
+        svg = svg.replace(select_s,RED_STROKE)
     elif mode == "b":
         svg = svg.replace(select_f,BLUE_REG_FILL)
-        svg = svg.replace(select_c,BLUE_STROKE)
+        svg = svg.replace(select_s,BLUE_STROKE)
     elif mode == "r":
         if step%4 == 1:
             svg = svg.replace(select_f,GREEN_REG_FILL)
-            svg = svg.replace(select_c,GREEN_STROKE)
+            svg = svg.replace(select_s,GREEN_STROKE)
         elif step%4 == 3:
             svg = svg.replace(select_f,ORANGE_REG_FILL)
-            svg = svg.replace(select_c,ORANGE_STROKE)
+            svg = svg.replace(select_s,ORANGE_STROKE)
     
     elif mode == "clr":
         svg = svg.replace(select_f,CLR_REG_FILL)
-        svg = svg.replace(select_c,CLR_STROKE)
+        svg = svg.replace(select_s,CLR_STROKE)
     return svg
 
 def Reg_Color_CLR(svg):
@@ -65,38 +65,38 @@ def Reg_Color_CLR(svg):
     return svg
 
 def path(svg,path_name,mode,step):
-    select_c = path_name+"_PATH_STROKE"
+    select_s = path_name+"_PATH_STROKE"
     select_f = path_name+"_PATH_FILL"
-    select_reg_c = path_name+"_STROKE"
+    select_reg_s = path_name+"_STROKE"
     select_reg_f = path_name+"_FILL"
 
     if mode == "a":
         svg = svg.replace(select_f,RED_PATH_FILL)
-        svg = svg.replace(select_c,RED_STROKE)
+        svg = svg.replace(select_s,RED_STROKE)
     elif mode == "b":
         svg = svg.replace(select_f,BLUE_PATH_FILL)
-        svg = svg.replace(select_c,BLUE_STROKE)
+        svg = svg.replace(select_s,BLUE_STROKE)
     elif mode == "alu":
         if step%4 == 3 or step%4 == 0:
             svg = svg.replace(select_f,GREEN_PATH_FILL)
-            svg = svg.replace(select_c,GREEN_STROKE)
+            svg = svg.replace(select_s,GREEN_STROKE)
         elif step%4 == 1 or step%4 == 2:
             svg = svg.replace(select_f,ORANGE_PATH_FILL)
-            svg = svg.replace(select_c,ORANGE_STROKE)
+            svg = svg.replace(select_s,ORANGE_STROKE)
     elif mode == "tmp":
         if step%4 == 0 or step%4 == 1:
             svg = svg.replace(select_f,GREEN_PATH_FILL)
-            svg = svg.replace(select_c,GREEN_STROKE)
+            svg = svg.replace(select_s,GREEN_STROKE)
             svg = svg.replace(select_reg_f,GREEN_REG_FILL)
-            svg = svg.replace(select_reg_c,GREEN_STROKE)
+            svg = svg.replace(select_reg_s,GREEN_STROKE)
         elif step%4 == 2 or step%4 == 3:
             svg = svg.replace(select_f,ORANGE_PATH_FILL)
-            svg = svg.replace(select_c,ORANGE_STROKE)
+            svg = svg.replace(select_s,ORANGE_STROKE)
             svg = svg.replace(select_reg_f,ORANGE_REG_FILL)
-            svg = svg.replace(select_reg_c,ORANGE_STROKE)
+            svg = svg.replace(select_reg_s,ORANGE_STROKE)
     elif mode == "clr":
         svg = svg.replace(select_f,CLR_PATH_FILL)
-        svg = svg.replace(select_c,CLR_STROKE)
+        svg = svg.replace(select_s,CLR_STROKE)
 
     return svg
 
@@ -126,15 +126,15 @@ def svg_make(a_bus,b_bus,y_bus,mode,sel,step):
         svg = path(svg,"ALU","alu",step)
         svg = path(svg,"TMP","tmp",step)
 
-        svg = test_set(svg,"ALU_MODE",mode)
-        svg = test_set(svg,"ALU_SEL",sel)
+        svg = text_set(svg,"ALU_MODE",mode)
+        svg = text_set(svg,"ALU_SEL",sel)
 
-        svg = test_set(svg,"STEP_COUNT",str(step))
-        svg = test_set(svg,"INSTRUCTION_N","CALL")
+        svg = text_set(svg,"STEP_COUNT",str(step))
+        svg = text_set(svg,"INSTRUCTION_N","CALL")
         if b_bus != None:
-            svg = test_set(svg,"MICRO_INSTRUCTION",mode+" : "+a_bus+", "+b_bus+"  -&gt; "+y_bus)
+            svg = text_set(svg,"MICRO_INSTRUCTION",mode+" : "+a_bus+", "+b_bus+"  -&gt; "+y_bus)
         else:
-            svg = test_set(svg,"MICRO_INSTRUCTION",mode+" : "+a_bus+" -&gt; "+y_bus)
+            svg = text_set(svg,"MICRO_INSTRUCTION",mode+" : "+a_bus+" -&gt; "+y_bus)
 
         if a_bus == "MEM":
             svg = path(svg,"EXT","a",step)
@@ -214,7 +214,7 @@ def main():
         now_inst = next_inst
         time.sleep(1)
 
-def test_set(svg,name,txt):
+def text_set(svg,name,txt):
     select = name
     svg = svg.replace(select,txt)
     return svg
