@@ -112,7 +112,7 @@ def CLK(svg,step):
     
     return svg
 
-def svg_make(a_bus,b_bus,y_bus,mode,sel,step):
+def svg_make(a_bus,b_bus,y_bus,mode,sel,instruction,step):
     with open("./base.svg") as f:
         svg = f.read()
         
@@ -130,11 +130,12 @@ def svg_make(a_bus,b_bus,y_bus,mode,sel,step):
         svg = text_set(svg,"ALU_SEL",sel)
 
         svg = text_set(svg,"STEP_COUNT",str(step))
-        svg = text_set(svg,"INSTRUCTION_N","CALL")
         if b_bus != None:
             svg = text_set(svg,"MICRO_INSTRUCTION",mode+" : "+a_bus+", "+b_bus+"  -&gt; "+y_bus)
         else:
             svg = text_set(svg,"MICRO_INSTRUCTION",mode+" : "+a_bus+" -&gt; "+y_bus)
+        
+        svg = text_set(svg,"INSTRUCTION_N",instruction)
 
         if a_bus == "MEM":
             svg = path(svg,"EXT","a",step)
@@ -163,8 +164,9 @@ def svg_make(a_bus,b_bus,y_bus,mode,sel,step):
 def main():
     with open("./pattern.txt") as f:
         inst_list = f.readlines()
-    now_inst = inst_list[0]
-    inst_list = inst_list[1:]
+    instruction = inst_list[0]
+    now_inst = inst_list[1]
+    inst_list = inst_list[2:]
     step = 0
     for next_inst in inst_list:
         inst_token = now_inst[0:-1].split(" ")
@@ -209,10 +211,10 @@ def main():
             next_a_bus = inst_token[2]
             next_b_bus = inst_token[3]
         
-        svg_make(now_a_bus,now_b_bus,now_y_bus,now_mode,now_sel,step)
+        svg_make(now_a_bus,now_b_bus,now_y_bus,now_mode,now_sel,instruction,step)
         step += 1
         time.sleep(1)
-        svg_make(next_a_bus,next_b_bus,now_y_bus,next_mode,next_sel,step)
+        svg_make(next_a_bus,next_b_bus,now_y_bus,next_mode,next_sel,instruction,step)
         step += 1
         now_inst = next_inst
         time.sleep(1)
