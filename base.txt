@@ -1,0 +1,42 @@
+TMP Reg :
+    TMP_COLOR, #82b366
+    TMP_FILL, url(#mx-gradient-d5e8d4-1-97d077-1-s-0)
+    TMP_PATH_COLOR ,#82b366
+    TMP_PATH_FILL, #d5e8d4
+
+ALU :
+    ALU_PATH_COLOR ,#d79b00
+    ALU_PATH_FILL, #ffe6cc
+
+ALU_MODE,
+ALU_SEL,
+
+STEP_COUNT
+INSTRUCTION_N
+
+MICRO_INSTRUCTION
+#b85450
+#82b366
+#6c8ebf
+#d79b00
+
+url(#mx-gradient-f8cecc-1-ea6b66-1-s-0)
+url(#mx-gradient-d5e8d4-1-97d077-1-s-0)
+url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)
+url(#mx-gradient-ffcd28-1-ffa500-1-s-0)
+
+ID-00_COLOR
+ID-00_FILL
+
+A_PATH_COLOR,#b85450
+A_PATH_FILL,#f8cecc
+
+B_PATH_COLOR,#6c8ebf
+B_PATH_FILL,#dae8fc
+
+DATA_COLOR,
+DATA_FILL,
+
+CLK_1,rgb(51, 255, 51)
+
+CLK_2,rgb(51, 255, 51)
