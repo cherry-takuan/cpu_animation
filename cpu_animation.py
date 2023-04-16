@@ -161,7 +161,7 @@ def svg_make(a_bus,b_bus,y_bus,mode,sel,step):
             f.write(svg)
 
 def main():
-    with open("./patern.txt") as f:
+    with open("./pattern.txt") as f:
         inst_list = f.readlines()
     now_inst = inst_list[0]
     inst_list = inst_list[1:]
