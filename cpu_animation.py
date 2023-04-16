@@ -154,6 +154,9 @@ def svg_make(a_bus,b_bus,y_bus,mode,sel,step):
 
         svg = Reg_Color_CLR(svg)
         svg = CLK(svg,step)
+
+        with open("./test/"+str(step)+".svg", mode='w') as f:
+            f.write(svg)
         with open("./test.svg", mode='w') as f:
             f.write(svg)
 
